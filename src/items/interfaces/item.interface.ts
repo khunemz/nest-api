@@ -1,4 +1,6 @@
-export interface Item {
+import mongoose from 'mongoose';
+
+export interface Item extends mongoose.Document {
   id?: string;
   name: string;
   description?: string;

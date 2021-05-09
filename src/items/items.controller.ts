@@ -13,21 +13,23 @@ import { Item } from './interfaces/item.interface';
 @Controller('items')
 export class ItemsController {
   constructor(private itemService: ItemService) {}
+  // @Get()
+  // findAll(): Item[] {
+  //   return this.itemService.findAll();
+  // }
   @Get()
-  findAll(): Item[] {
+  findAll(): Promise<Item[]> {
     return this.itemService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): string {
-    return `This action returns a #${id} cat`;
+  findOne(@Param('id') id): Promise<Item> {
+    return this.itemService.findOne(id);
   }
 
   @Post()
-  create(@Body() createItem: CreateItem): string {
-    return `CREATE ITEMS ${createItem.name} 
-      ${createItem.description}
-      ${createItem.qty}`;
+  create(@Body() createItem: CreateItem): Promise<Item> {
+    return this.itemService.create(createItem);
   }
 
   @Delete(':id')
